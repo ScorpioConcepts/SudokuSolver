@@ -1,0 +1,155 @@
+﻿<Window x:Class="SudokuSolver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sudoku Solving Experiment" Height="550" Width="775" 
+        Icon="sudokuSolve.ico" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        <Button Name="btnSolve" 
+                DockPanel.Dock="Bottom"
+                Click="btnSolve_Click">Solve Puzzle</Button>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Name="btnSave" Grid.Column="0" Click="btnSave_Click">Save Sudoku</Button>
+            <Button Name="btnLoad" Grid.Column="1" Click="btnLoad_Click">Load Sudoku</Button>
+            <Button Name="btnClear" Grid.Column="2" Click="btnClear_Click">Clear Sudoku</Button>
+        </Grid>
+        <ScrollViewer DockPanel.Dock="Right" Width="250">
+            <TextBlock Name="txtLog" />
+        </ScrollViewer>
+        <Grid Name="numbers">
+            <Grid.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="FontSize" Value="20" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Width" Value="Auto" />
+                    <Setter Property="Height" Value="Auto" />
+                    <Setter Property="BorderBrush" Value="Gray" />
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox Name="row1col1" Grid.Row="0" Grid.Column="0" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row1col2" Grid.Row="0" Grid.Column="1" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row1col3" Grid.Row="0" Grid.Column="2" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row1col4" Grid.Row="0" Grid.Column="3" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row1col5" Grid.Row="0" Grid.Column="4" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row1col6" Grid.Row="0" Grid.Column="5" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row1col7" Grid.Row="0" Grid.Column="6" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row1col8" Grid.Row="0" Grid.Column="7" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row1col9" Grid.Row="0" Grid.Column="8" Background="LightGray" LostFocus="rowcol_LostFocus" />
+
+            <TextBox Name="row2col1" Grid.Row="1" Grid.Column="0" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row2col2" Grid.Row="1" Grid.Column="1" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row2col3" Grid.Row="1" Grid.Column="2" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row2col4" Grid.Row="1" Grid.Column="3" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row2col5" Grid.Row="1" Grid.Column="4" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row2col6" Grid.Row="1" Grid.Column="5" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row2col7" Grid.Row="1" Grid.Column="6" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row2col8" Grid.Row="1" Grid.Column="7" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row2col9" Grid.Row="1" Grid.Column="8" Background="LightGray" LostFocus="rowcol_LostFocus" />
+
+            <TextBox Name="row3col1" Grid.Row="2" Grid.Column="0" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row3col2" Grid.Row="2" Grid.Column="1" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row3col3" Grid.Row="2" Grid.Column="2" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row3col4" Grid.Row="2" Grid.Column="3" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row3col5" Grid.Row="2" Grid.Column="4" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row3col6" Grid.Row="2" Grid.Column="5" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row3col7" Grid.Row="2" Grid.Column="6" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row3col8" Grid.Row="2" Grid.Column="7" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row3col9" Grid.Row="2" Grid.Column="8" Background="LightGray" LostFocus="rowcol_LostFocus" />
+
+            <TextBox Name="row4col1" Grid.Row="3" Grid.Column="0" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row4col2" Grid.Row="3" Grid.Column="1" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row4col3" Grid.Row="3" Grid.Column="2" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row4col4" Grid.Row="3" Grid.Column="3" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row4col5" Grid.Row="3" Grid.Column="4" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row4col6" Grid.Row="3" Grid.Column="5" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row4col7" Grid.Row="3" Grid.Column="6" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row4col8" Grid.Row="3" Grid.Column="7" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row4col9" Grid.Row="3" Grid.Column="8" LostFocus="rowcol_LostFocus" />
+
+            <TextBox Name="row5col1" Grid.Row="4" Grid.Column="0" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row5col2" Grid.Row="4" Grid.Column="1" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row5col3" Grid.Row="4" Grid.Column="2" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row5col4" Grid.Row="4" Grid.Column="3" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row5col5" Grid.Row="4" Grid.Column="4" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row5col6" Grid.Row="4" Grid.Column="5" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row5col7" Grid.Row="4" Grid.Column="6" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row5col8" Grid.Row="4" Grid.Column="7" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row5col9" Grid.Row="4" Grid.Column="8" LostFocus="rowcol_LostFocus" />
+
+            <TextBox Name="row6col1" Grid.Row="5" Grid.Column="0" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row6col2" Grid.Row="5" Grid.Column="1" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row6col3" Grid.Row="5" Grid.Column="2" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row6col4" Grid.Row="5" Grid.Column="3" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row6col5" Grid.Row="5" Grid.Column="4" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row6col6" Grid.Row="5" Grid.Column="5" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row6col7" Grid.Row="5" Grid.Column="6" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row6col8" Grid.Row="5" Grid.Column="7" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row6col9" Grid.Row="5" Grid.Column="8" LostFocus="rowcol_LostFocus" />
+
+            <TextBox Name="row7col1" Grid.Row="6" Grid.Column="0" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row7col2" Grid.Row="6" Grid.Column="1" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row7col3" Grid.Row="6" Grid.Column="2" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row7col4" Grid.Row="6" Grid.Column="3" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row7col5" Grid.Row="6" Grid.Column="4" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row7col6" Grid.Row="6" Grid.Column="5" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row7col7" Grid.Row="6" Grid.Column="6" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row7col8" Grid.Row="6" Grid.Column="7" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row7col9" Grid.Row="6" Grid.Column="8" Background="LightGray" LostFocus="rowcol_LostFocus" />
+
+            <TextBox Name="row8col1" Grid.Row="7" Grid.Column="0" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row8col2" Grid.Row="7" Grid.Column="1" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row8col3" Grid.Row="7" Grid.Column="2" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row8col4" Grid.Row="7" Grid.Column="3" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row8col5" Grid.Row="7" Grid.Column="4" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row8col6" Grid.Row="7" Grid.Column="5" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row8col7" Grid.Row="7" Grid.Column="6" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row8col8" Grid.Row="7" Grid.Column="7" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row8col9" Grid.Row="7" Grid.Column="8" Background="LightGray" LostFocus="rowcol_LostFocus" />
+
+            <TextBox Name="row9col1" Grid.Row="8" Grid.Column="0" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row9col2" Grid.Row="8" Grid.Column="1" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row9col3" Grid.Row="8" Grid.Column="2" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row9col4" Grid.Row="8" Grid.Column="3" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row9col5" Grid.Row="8" Grid.Column="4" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row9col6" Grid.Row="8" Grid.Column="5" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row9col7" Grid.Row="8" Grid.Column="6" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row9col8" Grid.Row="8" Grid.Column="7" Background="LightGray" LostFocus="rowcol_LostFocus" />
+            <TextBox Name="row9col9" Grid.Row="8" Grid.Column="8" Background="LightGray" LostFocus="rowcol_LostFocus" />
+        </Grid>
+    </DockPanel>
+</Window>
